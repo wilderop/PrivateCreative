@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.azpbmd</groupId>
+    <artifactId>privatecreative</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>PrivateCreative</name>
+    <description>Per-player private creative worlds plugin</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <paper.api.version>1.21.1-R0.1-SNAPSHOT</paper.api.version>
+        <bungeecord.chat.version>1.21-R0.1</bungeecord.chat.version>  <!-- Stable version -->
+    </properties>
+
+    <repositories>
+        <!-- PaperMC Maven repository (contains Paper API) -->
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <!-- Maven Central (for transitive deps like Kyori Adventure and stable BungeeChat) -->
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <!-- Spigot repo for snapshots if needed -->
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Paper API - compileOnly since it's provided by the server -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>${paper.api.version}</version>
+            <scope>compileOnly</scope>
+        </dependency>
+        <!-- Explicit Kyori Adventure API -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.17.0</version>
+            <scope>compileOnly</scope>
+        </dependency>
+        <!-- Explicit Kyori Adventure Key (fixes Key/Keyed class not found) -->
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-key</artifactId>
+            <version>4.17.0</version>
+            <scope>compileOnly</scope>
+        </dependency>
+        <!-- BungeeChat for legacy ChatColor compilation (Paper remaps at runtime) -->
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-chat</artifactId>
+            <version>${bungeecord.chat.version}</version>
+            <scope>compileOnly</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven compiler plugin (ensures Java 21) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven JAR plugin - includes plugin.yml and config.yml automatically from resources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+            </plugin>
+        </plugins>
+
+        <!-- Final JAR name will be privatecreative-1.0-SNAPSHOT.jar -->
+        <finalName>privatecreative-1.0-SNAPSHOT</finalName>
+    </build>
+</project>

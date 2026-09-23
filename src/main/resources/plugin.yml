@@ -1,0 +1,27 @@
+name: PrivateCreative
+version: 1.0
+main: com.azpbmd.privatecreative.PrivateCreative
+api-version: '1.21'  # For Paper 1.21.1
+commands:
+  home:
+    description: Teleport to your own private world.
+    usage: /home
+  invite:
+    description: Invite a player to your private world.
+    usage: /invite <player>
+  banish:
+    description: Uninvite a player from your private world.
+    usage: /banish <player>
+  visit:
+    description: Visit a player's private world if invited.
+    usage: /visit <player>
+  visitlist:
+    description: List players whose worlds you can visit.
+    usage: /visitlist
+  invitelist:
+    description: List players invited to your world.
+    usage: /invitelist
+  pworld:
+    description: Admin commands for private worlds.
+    usage: /pworld expand <player> <new_radius>
+    permission: op  # Restricted to ops
